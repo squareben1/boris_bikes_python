@@ -1,7 +1,9 @@
 import pytest
 from lib import DockingStation
+from lib import Bike
 
 dock = DockingStation('London')
 
 def test_docking_station_release():
-    assert dock.release() == "Bike"
+    bike = dock.release()
+    assert bike.working() == True
