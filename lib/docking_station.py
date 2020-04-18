@@ -11,7 +11,10 @@ class DockingStation:
         return self.rack
 
     def release(self):
-        return self.rack.pop()
+        if len(self.rack) > 0:
+            return self.rack.pop()
+        else:
+            return "Rack is empty"
 
     def available(self):
         return self.rack
