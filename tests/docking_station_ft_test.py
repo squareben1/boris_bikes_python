@@ -10,5 +10,4 @@ def test_docking_station_release():
 
 def test_docking_station_deposit():
     bike = Bike("dockingBike")
-    dock.deposit(bike)
-    assert dock.rack == [bike]
+    assert dock.deposit(bike) == [bike]

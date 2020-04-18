@@ -10,5 +10,6 @@ class DockingStation:
         return Bike("BMX")
 
     def deposit(self, bike):
-        return self.rack.append(bike)
+        self.rack.append(bike)
+        return self.rack
 
