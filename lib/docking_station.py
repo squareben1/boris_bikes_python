@@ -7,7 +7,7 @@ class DockingStation:
         self.rack = []
 
     def release(self):
-        return Bike("BMX")
+        return self.rack.pop()
 
     def deposit(self, bike):
         self.rack.append(bike)

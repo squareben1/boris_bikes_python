@@ -5,8 +5,9 @@ from lib import Bike
 dock = DockingStation('London')
 
 def test_docking_station_release():
-    bike = dock.release()
-    assert bike.working() == True
+    bike = Bike("newBike") 
+    dock.deposit(bike)
+    assert dock.release() == bike
 
 def test_docking_station_deposit():
     bike = Bike("dockingBike")
