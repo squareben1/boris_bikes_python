@@ -7,3 +7,8 @@ dock = DockingStation('London')
 def test_docking_station_release():
     bike = dock.release()
     assert bike.working() == True
+
+def test_docking_station_deposit():
+    bike = Bike("dockingBike")
+    dock.deposit(bike)
+    assert dock.rack == [bike]
