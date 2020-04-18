@@ -6,10 +6,13 @@ class DockingStation:
         self.location = location
         self.rack = []
 
+    def deposit(self, bike):
+        self.rack.append(bike)
+        return self.rack
+
     def release(self):
         return self.rack.pop()
 
-    def deposit(self, bike):
-        self.rack.append(bike)
+    def available(self):
         return self.rack
 
