@@ -19,3 +19,10 @@ def test_bikes_available():
     bike3 = "availableBike"
     dock.deposit(bike3)
     assert dock.available() == [bike3]
+
+def test_docking_station_max_cap():
+    del dock.rack[:]
+    dock.rack = list(range(1,11))
+    bike11 = 'bike11'
+    with pytest.raises(ValueError):
+        dock.deposit(bike11)
