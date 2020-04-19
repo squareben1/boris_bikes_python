@@ -8,47 +8,49 @@ dock = DockingStation('London')
 def clear_rack():
     del dock.rack[:]
 
+bike = Bike("newBike")
+bike2 = Bike("otherBike")
+
 def test_docking_station_release_empty():
     with pytest.raises(ValueError):
         dock.release()
 
 def test_docking_station_release():
-    bike1 = Bike("newBike") 
-    dock.deposit(bike1)
-    assert dock.release() == bike1
+    dock.deposit(bike)
+    assert dock.release() == bike
     print('dock', dock)
 
 def test_docking_station_deposit():
-    bike2 = Bike("dockingBike")
-    assert dock.deposit(bike2) == [bike2]
+    assert dock.deposit(bike) == [bike]
 
 def test_docking_station_max_cap():
     for i in range(1,21):
         i = dock.deposit(Bike('1'))
-    bike11 = Bike('bike11')
     with pytest.raises(ValueError):
-        dock.deposit(bike11)
+        dock.deposit(bike)
 
 def test_bikes_available():
-    bike3 = Bike("availableBike")
-    dock.deposit(bike3)
-    assert dock.available() == [bike3]
+    dock.deposit(bike)
+    assert dock.available() == [bike]
 
 def test_user_set_maximum():
     dock2 = DockingStation('Brighton',1)
-    bike4 = Bike("overDock")
-    bike5 = Bike("overDock2")
-    dock2.deposit(bike4)
+    dock2.deposit(bike)
     with pytest.raises(ValueError):
-        dock2.deposit(bike5)
+        dock2.deposit(bike2)
 
 def test_report_broken():
-    broken_bike = Bike('bustedBMX')
-    dock.deposit(broken_bike, True)
+    dock.deposit(bike, True)
     assert dock.rack[0].working == False
     
 def test_release_broken_bike():
-    broken_bike2 = Bike('bustedPinnacle')
-    dock.deposit(broken_bike2, True)
+    dock.deposit(bike, True)
     with pytest.raises(ValueError):
         dock.release()
+
+def test_release_working_bike_only():
+    bike.working = True
+    dock.deposit(bike)
+    dock.deposit(bike2, True) # deposit broken bike
+    assert dock.release() == bike #expect to release the working bike
+
