@@ -13,3 +13,9 @@ def test_docking_station_deposit():
     bike = "dockingBike"
     dock.deposit(bike)
     assert dock.rack == [bike]
+
+def test_bikes_available():
+    dock.release()
+    bike3 = "availableBike"
+    dock.deposit(bike3)
+    assert dock.available() == [bike3]

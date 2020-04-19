@@ -14,7 +14,7 @@ class DockingStation:
         if len(self.rack) > 0:
             return self.rack.pop()
         else:
-            return "Rack is empty"
+            raise ValueError('Rack is empty')
 
     def available(self):
         return self.rack

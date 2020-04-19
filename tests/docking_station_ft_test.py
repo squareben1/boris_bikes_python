@@ -5,7 +5,8 @@ from lib import Bike
 dock = DockingStation('London')
 
 def test_docking_station_release_empty():
-    assert dock.release() == "Rack is empty"
+    with pytest.raises(ValueError):
+        dock.release()
 
 def test_docking_station_release():
     bike1 = Bike("newBike") 
