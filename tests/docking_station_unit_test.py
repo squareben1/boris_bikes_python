@@ -5,41 +5,48 @@ from doubles import InstanceDouble, allow
 
 dock = DockingStation('London')
 
+class BikeDouble:
+    def __init__(self,model):
+        self.model = model
+        self.working = True
+
+    def report_broken(self):
+        self.working = False
+        return self.working
+
 @pytest.fixture(autouse=True)
 def clear_rack():
     del dock.rack[:]
 
+bike = BikeDouble("newBike")
+bike2 = BikeDouble("secondBike")
+
 def test_docking_station_release():
-    bike = "newBike"
     dock.deposit(bike)
     assert dock.release() == bike
 
 def test_docking_station_deposit():
-    bike = "dockingBike"
     dock.deposit(bike)
     assert dock.rack == [bike]
 
 def test_bikes_available():
-    bike3 = "availableBike"
-    dock.deposit(bike3)
-    assert dock.available() == [bike3]
+    dock.deposit(bike)
+    assert dock.available() == [bike]
 
 def test_docking_station_max_cap():
     dock.rack = list(range(1,21))
-    bike11 = 'bike11'
     with pytest.raises(ValueError):
-        dock.deposit(bike11)
+        dock.deposit(bike)
 
 def test_user_set_max():
     dock2 = DockingStation('Brighton', 1)
-    dock2.rack.append('bikeA')
+    dock2.rack.append(bike)
     with pytest.raises(ValueError):
-        dock2.deposit('bikeB')
+        dock2.deposit(bike2)
 
 # Note: fix this test when python version problems resolved, use double
-# def test_report_broken():
-#     broken_bike = InstanceDouble('Bike')
-#     allow(broken_bike).report_broken
-#     print('broken_bike', broken_bike)
-#     assert dock.deposit(broken_bike, True)[0].working == False
+def test_report_broken():
+    broken_bike = BikeDouble('busted')
+    print('broken_bike', broken_bike)
+    assert dock.deposit(broken_bike, True)[0].working == False
     

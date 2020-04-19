@@ -47,3 +47,8 @@ def test_report_broken():
     dock.deposit(broken_bike, True)
     assert dock.rack[0].working == False
     
+def test_release_broken_bike():
+    broken_bike2 = Bike('bustedPinnacle')
+    dock.deposit(broken_bike2, True)
+    with pytest.raises(ValueError):
+        dock.release()
