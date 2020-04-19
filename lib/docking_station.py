@@ -21,17 +21,22 @@ class DockingStation:
             self.rack.append(bike)
             return self.rack      
 
-    def release(self):
+    def working_bikes_count(self):
         working_bikes = 0
         for i in range(len(self.rack)):
             if self.rack[i].working:
                 working_bikes += 1
+        return working_bikes
 
+    def next_working_bike(self):
+        for i in range(len(self.rack)):
+            if self.rack[i].working:
+                return self.rack.pop(i)
+
+    def release(self):
         if not self.__rack_empty():
-            if working_bikes > 0:
-                for i in range(len(self.rack)):
-                    if self.rack[i].working:
-                        return self.rack.pop(i)
+            if self.working_bikes_count() > 0:
+                return self.next_working_bike()
             else: 
                 raise ValueError('No Working Bikes')
         else:
