@@ -5,9 +5,6 @@ from lib import Bike
 dock = DockingStation('London')
 
 @pytest.fixture(autouse=True)
-def run_around_tests():
-    files_before = clear_rack()
-
 def clear_rack():
     del dock.rack[:]
 
