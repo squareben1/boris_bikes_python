@@ -53,4 +53,3 @@ def test_release_working_bike_only():
     dock.deposit(bike)
     dock.deposit(bike2, True) # deposit broken bike
     assert dock.release() == bike #expect to release the working bike
-

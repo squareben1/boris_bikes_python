@@ -1,7 +1,7 @@
 import pytest
 from lib import DockingStation
 from lib import Bike
-from doubles import InstanceDouble, allow
+# from doubles import InstanceDouble, allow
 
 dock = DockingStation('London')
 
