@@ -50,3 +50,13 @@ def test_report_broken():
     print('broken_bike', broken_bike)
     assert dock.deposit(broken_bike, True)[0].working == False
     
+def test_release_broken_bike():
+    dock.deposit(bike, True)
+    with pytest.raises(ValueError):
+        dock.release()
+
+def test_release_working_bike_only():
+    bike.working = True
+    dock.deposit(bike)
+    dock.deposit(bike2, True) # deposit broken bike
+    assert dock.release() == bike #expect to release the working bike
