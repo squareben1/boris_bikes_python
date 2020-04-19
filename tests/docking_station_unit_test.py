@@ -26,3 +26,10 @@ def test_docking_station_max_cap():
     bike11 = 'bike11'
     with pytest.raises(ValueError):
         dock.deposit(bike11)
+
+def test_user_set_max():
+    dock2 = DockingStation('Brighton', 1)
+    dock2.rack.append('bikeA')
+    with pytest.raises(ValueError):
+        dock2.deposit('bikeB')
+    

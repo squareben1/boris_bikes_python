@@ -4,6 +4,11 @@ from lib import Bike
 
 dock = DockingStation('London')
 
+
+# @pytest.fixture(scope="session", autouse=True)
+# def clear_rack():
+#     del dock.rack[:]
+
 def test_docking_station_release_empty():
     with pytest.raises(ValueError):
         dock.release()
@@ -31,3 +36,12 @@ def test_bikes_available():
     bike3 = Bike("availableBike")
     dock.deposit(bike3)
     assert dock.available() == [bike3]
+
+def test_user_set_maximum():
+    dock2 = DockingStation('Brighton',1)
+    bike4 = Bike("overDock")
+    bike5 = Bike("overDock2")
+    dock2.deposit(bike4)
+    with pytest.raises(ValueError):
+        dock2.deposit(bike5)
+
