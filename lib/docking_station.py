@@ -7,9 +7,12 @@ class DockingStation:
         self.rack = []
         self.__max_capacity = max_capacity
 
-    def deposit(self, bike):
+    def deposit(self, bike, broken=False):
         if self.__rack_full():
             raise ValueError('Rack is full')
+        # elif broken == True:
+        #     self.rack.append(bike.broken())
+        #     return self.rack
         else:
             self.rack.append(bike)
             return self.rack
