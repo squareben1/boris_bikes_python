@@ -42,3 +42,8 @@ def test_user_set_maximum():
     with pytest.raises(ValueError):
         dock2.deposit(bike5)
 
+def test_report_broken():
+    broken_bike = Bike('bustedBMX')
+    dock.deposit(broken_bike, True)
+    assert dock.rack[0].working == False
+    

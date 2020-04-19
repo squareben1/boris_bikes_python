@@ -1,6 +1,7 @@
 import pytest
 from lib import DockingStation
 from lib import Bike
+from doubles import InstanceDouble, allow
 
 dock = DockingStation('London')
 
@@ -34,4 +35,11 @@ def test_user_set_max():
     dock2.rack.append('bikeA')
     with pytest.raises(ValueError):
         dock2.deposit('bikeB')
+
+# Note: fix this test when python version problems resolved, use double
+# def test_report_broken():
+#     broken_bike = InstanceDouble('Bike')
+#     allow(broken_bike).report_broken
+#     print('broken_bike', broken_bike)
+#     assert dock.deposit(broken_bike, True)[0].working == False
     

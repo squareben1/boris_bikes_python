@@ -10,9 +10,10 @@ class DockingStation:
     def deposit(self, bike, broken=False):
         if self.__rack_full():
             raise ValueError('Rack is full')
-        # elif broken == True:
-        #     self.rack.append(bike.broken())
-        #     return self.rack
+        elif broken == True:
+            bike.report_broken()
+            self.rack.append(bike)
+            return self.rack
         else:
             self.rack.append(bike)
             return self.rack
