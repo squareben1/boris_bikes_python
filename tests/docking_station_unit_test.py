@@ -22,7 +22,7 @@ def test_bikes_available():
 
 def test_docking_station_max_cap():
     del dock.rack[:]
-    dock.rack = list(range(1,11))
+    dock.rack = list(range(1,21))
     bike11 = 'bike11'
     with pytest.raises(ValueError):
         dock.deposit(bike11)

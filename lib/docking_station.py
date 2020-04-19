@@ -5,7 +5,7 @@ class DockingStation:
     def __init__(self, location):
         self.location = location
         self.rack = []
-        self.max_capacity = 10
+        self.max_capacity = 20
 
 
     def deposit(self, bike):
